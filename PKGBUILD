@@ -13,7 +13,7 @@ license=('GPL' 'LGPL')
 arch=('i686' 'x86_64')
 depends=('ncurses')
 backup=('etc/sysctl.conf')
-source=("http://downloads.sourceforge.net/project/procps-ng/Production/procps-ng-${pkgver}.tar.xz"
+source=("https://downloads.sourceforge.net/project/procps-ng/Production/procps-ng-${pkgver}.tar.xz"
         'sysctl.conf')
 sha1sums=('82c0745f150f1385ca01fe7d24f05f74e31c94c6'
           '674282245d8ab2e09017b8f8cdce20a3ff81e631')
