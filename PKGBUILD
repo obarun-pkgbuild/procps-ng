@@ -6,7 +6,7 @@
 
 pkgname=procps-ng
 pkgver=3.3.12
-pkgrel=3
+pkgrel=4
 pkgdesc='Utilities for monitoring your system and its processes'
 url='https://gitlab.com/procps-ng/procps'
 license=('GPL' 'LGPL')
@@ -14,8 +14,10 @@ arch=('x86_64')
 depends=('ncurses')
 backup=('etc/sysctl.conf')
 source=("https://downloads.sourceforge.net/project/procps-ng/Production/procps-ng-${pkgver}.tar.xz"
+        'impossibly-high-memory.patch'
         'sysctl.conf')
 sha1sums=('82c0745f150f1385ca01fe7d24f05f74e31c94c6'
+          '27e32a557886dafac6e9c55ecf40e3d9a89eace2'
           '674282245d8ab2e09017b8f8cdce20a3ff81e631')
 groups=('base')
 conflicts=('procps' 'sysvinit-tools' 'sysctl-default-conf')
@@ -26,7 +28,7 @@ validpgpkeys=('6DD4217456569BA711566AC7F06E8FDE7B45DAAC') # Eric Vidal
 
 prepare() {
 	cd "${srcdir}/procps-ng-${pkgver}"
-
+	patch -p1 -i ../impossibly-high-memory.patch
 	sed 's:<ncursesw/:<:g' -i watch.c
 }
 
@@ -41,7 +43,8 @@ build() {
 		--bindir=/usr/bin \
 		--sbindir=/usr/bin \
 		--enable-watch8bit \
-		--disable-kill
+		--disable-kill \
+		--without-systemd
 	make
 }
 
