@@ -6,7 +6,7 @@
 
 pkgname=procps-ng
 pkgver=3.3.12
-pkgrel=4
+pkgrel=5
 pkgdesc='Utilities for monitoring your system and its processes'
 url='https://gitlab.com/procps-ng/procps'
 license=('GPL' 'LGPL')
@@ -44,6 +44,7 @@ build() {
 		--sbindir=/usr/bin \
 		--enable-watch8bit \
 		--disable-kill \
+		--disable-modern-top \
 		--without-systemd
 	make
 }
