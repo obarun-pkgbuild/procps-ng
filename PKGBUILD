@@ -5,8 +5,8 @@
 # 						Contributor: Eric Bélanger <eric@archlinux.org>
 
 pkgname=procps-ng
-pkgver=3.3.12
-pkgrel=5
+pkgver=3.3.13
+pkgrel=2
 pkgdesc='Utilities for monitoring your system and its processes'
 url='https://gitlab.com/procps-ng/procps'
 license=('GPL' 'LGPL')
@@ -14,27 +14,24 @@ arch=('x86_64')
 depends=('ncurses')
 backup=('etc/sysctl.conf')
 source=("https://downloads.sourceforge.net/project/procps-ng/Production/procps-ng-${pkgver}.tar.xz"
-        'impossibly-high-memory.patch'
-        'sysctl.conf')
-sha1sums=('82c0745f150f1385ca01fe7d24f05f74e31c94c6'
-          '27e32a557886dafac6e9c55ecf40e3d9a89eace2'
+       'sysctl.conf')
+sha1sums=('295cd8381170b0948f4dd2978374716755873ae3'
           '674282245d8ab2e09017b8f8cdce20a3ff81e631')
 groups=('base')
-conflicts=('procps' 'sysvinit-tools' 'sysctl-default-conf')
-replaces=('procps' 'sysvinit-tools' 'sysctl-default-conf')
+conflicts=('procps' 'sysvinit-tools')
+replaces=('procps' 'sysvinit-tools')
 provides=('procps' 'sysvinit-tools')
 install=procps-ng.install
 validpgpkeys=('6DD4217456569BA711566AC7F06E8FDE7B45DAAC') # Eric Vidal
 
 prepare() {
-	cd "${srcdir}/procps-ng-${pkgver}"
-	patch -p1 -i ../impossibly-high-memory.patch
+	cd $pkgname-$pkgver
 	sed 's:<ncursesw/:<:g' -i watch.c
 }
 
 build() {
-	cd "${srcdir}/procps-ng-${pkgver}"
-
+	cd  "$pkgname-$pkgver"
+	
 	./configure \
 		--prefix=/usr \
 		--exec-prefix=/ \
@@ -50,7 +47,7 @@ build() {
 }
 
 package() {
-	cd "${srcdir}/procps-ng-${pkgver}"
+	cd  "$pkgname-$pkgver"
 
 	make DESTDIR="${pkgdir}" install
 	install -Dm644 "sysctl.conf" "$pkgdir/etc/sysctl.conf"
