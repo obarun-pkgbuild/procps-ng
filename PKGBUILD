@@ -5,7 +5,7 @@
 # 						Contributor: Eric Bélanger <eric@archlinux.org>
 
 pkgname=procps-ng
-pkgver=3.3.13
+pkgver=3.3.14
 pkgrel=2
 pkgdesc='Utilities for monitoring your system and its processes'
 url='https://gitlab.com/procps-ng/procps'
@@ -15,7 +15,7 @@ depends=('ncurses')
 backup=('etc/sysctl.conf')
 source=("https://downloads.sourceforge.net/project/procps-ng/Production/procps-ng-${pkgver}.tar.xz"
        'sysctl.conf')
-sha1sums=('295cd8381170b0948f4dd2978374716755873ae3'
+sha1sums=('fcc4631b1185f7250daecee2fcebe15efbbe0d65'
           '674282245d8ab2e09017b8f8cdce20a3ff81e631')
 groups=('base')
 conflicts=('procps' 'sysvinit-tools')
